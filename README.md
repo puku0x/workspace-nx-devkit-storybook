@@ -2,6 +2,44 @@
 
 ![](https://github.com/user-attachments/assets/61f7bd8a-aee2-40d7-adc7-01c64f33b7d1)
 
+## How to add stories automatically
+
+Use `createProjectGraphAsync` to get the paths to the stories.
+
+You can filter the stories by using the name or tags of the project.
+
+```js
+import { createProjectGraphAsync } from '@nx/devkit';
+
+const getStories = async () => {
+  const graph = await createProjectGraphAsync();
+  const ignoredProjects = ['app1-e2e', 'app1-utils'];
+
+  return Object.keys(graph.nodes)
+    .filter((key) => graph.nodes[key].data.tags?.includes('scope:app1'))
+    .filter((key) => !ignoredProjects.includes(key))
+    .map((key) => {
+      const project = graph.nodes[key].data;
+      return {
+        directory: `../../../${project.sourceRoot}`,
+        titlePrefix: project.name,
+      };
+    });
+};
+
+const config = {
+  addons: ['@storybook/addon-essentials'],
+  framework: {
+    name: '@storybook/react-vite',
+    options: {},
+  },
+  staticDirs: ['../public'],
+  stories: getStories(),
+};
+
+export default config;
+```
+
 ## Run Storybook
 
 To run the storybook for your app, use:
