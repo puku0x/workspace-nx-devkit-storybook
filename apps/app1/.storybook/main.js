@@ -23,6 +23,7 @@ const config = {
     name: '@storybook/react-vite',
     options: {},
   },
+  staticDirs: ['../public'],
   stories: getStories(),
 };
 

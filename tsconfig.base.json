@@ -14,7 +14,17 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@workspace-nx-devkit-storybook/feature-a": [
+        "libs/app1/feature-a/src/index.ts"
+      ],
+      "@workspace-nx-devkit-storybook/feature-b": [
+        "libs/app1/feature-b/src/index.ts"
+      ],
+      "@workspace-nx-devkit-storybook/feature-c": [
+        "libs/app1/feature-c/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
